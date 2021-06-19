@@ -39,15 +39,14 @@ public class DataProcessServiceImpl implements DataProcessService {
 			log.error("Exception: {}", ex);
 
 		}
-
 	}
 
 	private void countDuplicateRemoval(String inputvalue) {
 
 		count = 0;
 		String cleaned = removeDuplicates(inputvalue, ' ');
-		//System.out.println("Org" + inputvalue + " rem: " + cleaned + " c: " + count);
 		updateData(inputvalue, cleaned, count);
+
 	}
 
 	private String removeDuplicates(String intputValue, char lastRemoved) {
@@ -65,18 +64,18 @@ public class DataProcessServiceImpl implements DataProcessService {
 			return removeDuplicates(intputValue, lastRemoved);
 		}
 
-		String rem_str = removeDuplicates(intputValue.substring(1, intputValue.length()), lastRemoved);
+		String remStr = removeDuplicates(intputValue.substring(1, intputValue.length()), lastRemoved);
 
-		if (rem_str.length() != 0 && rem_str.charAt(0) == intputValue.charAt(0)) {
+		if (remStr.length() != 0 && remStr.charAt(0) == intputValue.charAt(0)) {
 			lastRemoved = intputValue.charAt(0);
 
 			count++;
-			return rem_str.substring(1, rem_str.length());
+			return remStr.substring(1, remStr.length());
 		}
 
-		if (rem_str.length() == 0 && lastRemoved == intputValue.charAt(0))
-			return rem_str;
-		return (intputValue.charAt(0) + rem_str);
+		if (remStr.length() == 0 && lastRemoved == intputValue.charAt(0))
+			return remStr;
+		return (intputValue.charAt(0) + remStr);
 	}
 
 	private void updateData(String originalString, String cleanedString, int steps) {
